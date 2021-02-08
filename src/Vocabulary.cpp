@@ -1061,13 +1061,13 @@ int Vocabulary::stopWords(double minWeight)
 // --------------------------------------------------------------------------
 
 
-void Vocabulary::save(const std::string &filename,  bool binary_compressed) const
+void Vocabulary::save(const std::string &filename,  bool binary_compressed)
 {
 
     if ( filename.find(".yml")==std::string::npos){
         std::ofstream file_out(filename,std::ios::binary);
         if (!file_out) throw std::runtime_error("Vocabulary::saveBinary Could not open file :"+filename+" for writing");
-        toStream(file_out,binary_compressed);
+        toStream(file_out, binary_compressed);
     }
     else{
         cv::FileStorage fs(filename.c_str(), cv::FileStorage::WRITE);
@@ -1177,7 +1177,7 @@ void Vocabulary::save(cv::FileStorage &f,
 
 }
 
-void Vocabulary::toStream(  std::ostream &out_str, bool compressed) const throw(std::exception){
+void Vocabulary::toStream(  std::ostream &out_str, bool compressed){
 
     uint64_t sig=88877711233;//magic number describing the file
     out_str.write((char*)&sig,sizeof(sig));
@@ -1256,8 +1256,7 @@ void Vocabulary::toStream(  std::ostream &out_str, bool compressed) const throw(
     }
 }
 
-
-void Vocabulary:: load_fromtxt(const std::string &filename)throw(std::runtime_error){
+void Vocabulary::load_fromtxt(const std::string &filename){
 
     std::ifstream ifile(filename);
     if(!ifile)throw std::runtime_error("Vocabulary:: load_fromtxt  Could not open file for reading:"+filename);
@@ -1332,8 +1331,7 @@ void Vocabulary:: load_fromtxt(const std::string &filename)throw(std::runtime_er
            }
        }
 }
-void Vocabulary::fromStream(  std::istream &str )   throw(std::exception){
-
+void Vocabulary::fromStream(std::istream &str){
 
     m_words.clear();
     m_nodes.clear();
